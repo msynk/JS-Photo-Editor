@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Photo Editor</title>
+
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <div id="imageContainer" class="image"></div>
+        <div id="menuContainer" class="menu"></div>
+        <div id="sliderContainer" class="slider"></div>
+    </div>
+
+    <template id="sliderTemplate">
+        <div class="slider-container">
+            <input type="range" id="sliderInput" class="slider-input">
+        </div>
+    </template>
+
+    <template id="menuItemTemplate">
+        <button class="menu-item" id="btnMenu">Menu Item</button>
+    </template>
+
+    <script src="jsv.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
