@@ -1,6 +1,6 @@
-+function () {
++function (app) {
 
-    var options = [{
+    app.options = [{
         name: 'Brightness',
         property: 'brightness',
         value: 100,
@@ -50,39 +50,5 @@
         max: 20,
         unit: 'px'
     }];
-    var app = JSV.init('app');
-    var sliderTemplate = JSV.template('sliderTemplate');
-    var menuItemTemplate = JSV.template('menuItemTemplate');
 
-    app.sliderContainer.appendChild(sliderTemplate(function (ctx) {
-        var selectedMenuIndex = 0;
-        JSV.state('selectedMenu').sub(function (val) {
-            ctx.sliderInput.min = options[val].min;
-            ctx.sliderInput.max = options[val].max;
-            ctx.sliderInput.value = options[val].value;
-            selectedMenuIndex = val;
-        });
-        ctx.sliderInput.oninput = function (e) {
-            options[selectedMenuIndex].value = e.target.value;
-            app.imageContainer.setAttribute('style', getImageStyle());
-        }
-    }));
-
-    options.forEach(function (m, idx) {
-        app.menuContainer.appendChild(menuItemTemplate(function (ctx) {
-            JSV.state('selectedMenu').sub(function (val) {
-                ctx.btnMenu.classList[val == idx ? 'add' : 'remove']('active');
-            });
-            ctx.btnMenu.textContent = m.name;
-            ctx.btnMenu.onclick = function (e) { JSV.state('selectedMenu').pub(idx); };
-        }));
-    });
-    JSV.state('selectedMenu').pub(0);
-
-    // ========================================================================
-
-    function getImageStyle() {
-        var filters = options.map(function (o) { return o.property + '(' + o.value + o.unit + ')' })
-        return 'filter:' + filters.join(' ');
-    }
-}();
+}(app = JSV('app'));
